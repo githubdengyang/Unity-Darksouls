@@ -25,12 +25,11 @@ namespace SG
 		public bool rollFlag;
 		public bool sprintFlag;
 		public float rollInputTimer;
-		public bool isInteracting;
+		
 
 		//存储玩家的输入操作
 		PlayerControls inputActions;
-		//相机控制器
-		CameraHandler cameraHandler;
+		
 		
 		//存储玩家的移动输入和相机输入
 		Vector2 movementInnput;
@@ -50,18 +49,7 @@ namespace SG
 
 		private void Start()
 		{
-			cameraHandler = CameraHandler.singleton;
-		}
-
-		//相机输入一般放在FixedUpdate中
-		private void FixedUpdate()
-		{
-			float delta = Time.fixedDeltaTime;
-			if (cameraHandler != null)
-			{
-				cameraHandler.FollowTarget(delta);
-				cameraHandler.HandleCameraRotation(delta,mouseX,mouseY);
-			}
+			
 		}
 
 		public void OnDisable()
