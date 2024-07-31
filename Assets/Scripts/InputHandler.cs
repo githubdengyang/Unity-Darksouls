@@ -23,6 +23,8 @@ namespace SG
 		//存储玩家的滚动输入
 		public bool b_Input;
 		public bool rollFlag;
+		public bool sprintFlag;
+		public float rollInputTimer;
 		public bool isInteracting;
 
 		//存储玩家的输入操作
@@ -90,7 +92,18 @@ namespace SG
 
 			if (b_Input) 
 			{
-				rollFlag = true;
+				rollInputTimer += delta;
+				sprintFlag = true;
+			}
+			else
+			{
+				if (rollInputTimer > 0 && rollInputTimer < 0.5f)
+				{
+					sprintFlag = false;
+					rollFlag = true;
+				}
+
+				rollInputTimer = 0;
 			}
 		}
 	}
