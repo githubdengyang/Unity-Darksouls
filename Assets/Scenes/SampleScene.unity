@@ -1019,10 +1019,10 @@ MonoBehaviour:
   followSpeed: 0.1
   pivotSpeed: 0.03
   minimumPivot: -35
-  maxmumPivot: 35
+  maximumPivot: 35
   cameraSphereRadius: 0.2
-  cameraCollisionOffset: 0.2
-  minimumCollisionOffSet: 0.2
+  cameraCollisionOffSet: 0.2
+  minimumCollisionOffset: 0.2
 --- !u!4 &1070766644
 Transform:
   m_ObjectHideFlags: 0
@@ -1261,8 +1261,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.2
-  m_Height: 1.83
+  m_Radius: 0.16
+  m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &1911383243
@@ -1277,8 +1277,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61d131d1b6f98ab4691d69122211ea93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animatorHandler: {fileID: 0}
+  moveDirection: {x: 0, y: 0, z: 0}
   myTransform: {fileID: 0}
+  animatorHandler: {fileID: 0}
   rigidbody: {fileID: 0}
   normalCamera: {fileID: 0}
   groundDetectionRayStartPoint: 0.5
@@ -1286,10 +1287,10 @@ MonoBehaviour:
   groundDirectionRayDistance: 0.2
   inAirTimer: 0
   movementSpeed: 5
-  rotationSpeed: 10
+  walkingSpeed: 1
   sprintSpeed: 7
-  fallingSpeed: 100
-  moveDirection: {x: 0, y: 0, z: 0}
+  rotationSpeed: 10
+  fallingSpeed: 30
 --- !u!114 &1911383244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1311,6 +1312,7 @@ MonoBehaviour:
   rollFlag: 0
   sprintFlag: 0
   rollInputTimer: 0
+  isInteracting: 0
 --- !u!114 &1911383245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1323,7 +1325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fc59ba182c596e4089ecfef6499b099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSprinting: 0
   isInteracting: 0
+  isSprinting: 0
   isInAir: 0
   isGrounded: 0

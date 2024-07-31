@@ -1,70 +1,70 @@
-using System.Collections;
+锘縰sing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+
 namespace SG
 {
-	public class PlayerManager : MonoBehaviour
+    public class PlayerManager : MonoBehaviour
     {
-		InputHandler inputHandler;
-        Animator animator;
+        InputHandler inputHandler;
+        Animator anim;
+        CameraHandler cameraHandler;
+        PlayerLocomotion playerLocomotion;
 
-		//相机控制器
-		CameraHandler cameraHandler;
-		PlayerLocomotion playerLocomotion;
+        public bool isInteracting;
 
-		[Header("Player Flags")]
-		public bool isSprinting;
-		public bool isInteracting;
-		public bool isInAir;
-		public bool isGrounded;
+        [Header("Player Flags")]
+        public bool isSprinting;
+        public bool isInAir;
+        public bool isGrounded;
 
-		private void Awake()
-		{
-			cameraHandler = CameraHandler.singleton;
-		}
+        private void Awake()
+        {
+            cameraHandler = CameraHandler.singleton;
+        }
 
-		void Start()
+        void Start()
         {
             inputHandler = GetComponent<InputHandler>();
-			animator = GetComponentInChildren<Animator>();
-			playerLocomotion = GetComponent<PlayerLocomotion>();
-		}
+            anim = GetComponentInChildren<Animator>();
+            playerLocomotion = GetComponent<PlayerLocomotion>();
+        }
+
 
         void Update()
         {
-			float delta = Time.deltaTime;
+            float delta = Time.deltaTime;
+            isInteracting = anim.GetBool("isInteracting");
 
-			isInteracting = animator.GetBool("isInteracting");
-			
-			
-			inputHandler.TickInput(delta);
-			playerLocomotion.HandleMovement(delta);
-			playerLocomotion.HandleRollingAndSprinting(delta);
-			playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
-		}
+            inputHandler.TickInput(delta);
+            playerLocomotion.HandleMovement(delta);
+            playerLocomotion.HandleRollingAndSprinting(delta);
+            playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
+        }
 
-		//相机输入一般放在FixedUpdate中
-		private void FixedUpdate()
-		{
-			float delta = Time.fixedDeltaTime;
-			if (cameraHandler != null)
-			{
-				cameraHandler.FollowTarget(delta);
-				cameraHandler.HandleCameraRotation(delta, inputHandler.mouseX, inputHandler.mouseY);
-			}
-		}
+        private void FixedUpdate()
+        {
+            float delta = Time.fixedDeltaTime;
 
-		private void LateUpdate()
-		{
-			inputHandler.rollFlag = false;
-			inputHandler.sprintFlag = false;
-			isSprinting = inputHandler.b_Input;
+            if (cameraHandler != null)
+            {
+                cameraHandler.FollowTarget(delta);
+                cameraHandler.HandleCameraRotation(delta, inputHandler.mouseX, inputHandler.mouseY);
+            }
+        }
 
-			if (isInAir)
-			{
-				playerLocomotion.inAirTimer = playerLocomotion.inAirTimer + Time.deltaTime;
-			}
-		}
-	}
+        private void LateUpdate()
+        {
+            inputHandler.rollFlag = false;
+            inputHandler.sprintFlag = false;
+            isSprinting = inputHandler.b_Input;
+
+            if (isInAir)
+            {
+                playerLocomotion.inAirTimer = playerLocomotion.inAirTimer + Time.deltaTime;
+            }
+        }
+
+
+    }
 }
